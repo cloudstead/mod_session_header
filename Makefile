@@ -4,9 +4,9 @@
 ##
 
 builddir=.
-top_srcdir=/Users/rbb/Projects/apacheinst
-top_builddir=/Users/rbb/Projects/apacheinst
-include /Users/rbb/Projects/apacheinst/build/special.mk
+top_srcdir=/usr/share/apache2/
+top_builddir=/usr/share/apache2/
+include /usr/share/apache2/build/special.mk
 
 #   the used tools
 APACHECTL=apachectl
