@@ -1,9 +1,12 @@
 
 #include "httpd.h"
 #include "http_config.h"
+#include "http_request.h"
 #include "http_protocol.h"
 #include "ap_config.h"
 #include "util_cookies.h"
+#include "util.h"
+#include "apr_strings.h"
 
 int session_header_fixups(request_rec *r);
 module AP_MODULE_DECLARE_DATA session_header_module;
@@ -26,11 +29,17 @@ int session_header_fixups(request_rec *r) {
     server_cfg_t *conf = (server_cfg_t *)ap_get_module_config(r->per_dir_config, 
                                                 &session_header_module);
     const char *val = NULL;
+    char *unescaped;
 
     /* Get the cookie from the request */
     ap_cookie_read(r, conf->cookie_name, &val, 0);
+    if (val == NULL) {
+        return OK;
+    }
+    unescaped = apr_pstrdup(r->pool, val);
 
-    apr_table_addn(r->headers_in, "Authorization", val);
+    ap_unescape_url(unescaped);
+    apr_table_addn(r->headers_in, "Authorization", unescaped);
     return OK;
 }
 
