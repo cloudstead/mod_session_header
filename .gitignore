@@ -1,0 +1,5 @@
+.libs/
+mod_session_header.la
+mod_session_header.lo
+mod_session_header.o
+mod_session_header.slo
