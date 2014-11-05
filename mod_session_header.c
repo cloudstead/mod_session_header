@@ -37,7 +37,7 @@ int session_header_fixups(request_rec *r) {
     }
     unescaped = apr_pstrdup(r->pool, val);
 
-    ap_unescape_url(unescaped);
+    ap_unescape_urlencoded(unescaped);
     apr_table_addn(r->headers_in, "Authorization", unescaped);
     return OK;
 }
