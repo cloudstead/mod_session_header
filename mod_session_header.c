@@ -5,7 +5,6 @@
 #include "http_protocol.h"
 #include "ap_config.h"
 #include "util_cookies.h"
-#include "util.h"
 #include "apr_strings.h"
 
 int session_header_fixups(request_rec *r);
